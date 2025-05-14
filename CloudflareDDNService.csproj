@@ -91,5 +91,10 @@
   <ItemGroup>
     <Content Include="cloudflare.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ConfigurationForm.resx">
+      <DependentUpon>ConfigurationForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -253,6 +253,51 @@ namespace CloudflareDDNService
             }
         }
 
+        // Aggiungi questo metodo alla classe CloudflareDDNService
+        public void ReloadConfiguration()
+        {
+            try
+            {
+                logger?.Log("Reloading configuration...");
+
+                // Ricarica la configurazione
+                var config = configManager.LoadConfiguration();
+
+                // Se il cliente è già inizializzato, dobbiamo solo aggiornare il timer
+                if (cloudflareClient != null)
+                {
+                    // Aggiorna il cliente con le nuove credenziali
+                    cloudflareClient = new CloudflareClient(config.ApiKey, config.Email, config.Domain);
+
+                    // Aggiorna il timer con il nuovo intervallo
+                    if (updateTimer != null)
+                    {
+                        updateTimer.Stop();
+
+                        // Calcola il nuovo intervallo in millisecondi
+                        int interval = Math.Max(1, config.UpdateInterval) * 60 * 1000; // Minimo 1 minuto
+                        updateTimer.Interval = interval;
+
+                        // Registra il nuovo intervallo
+                        logger?.Log($"Timer interval updated: {config.UpdateInterval} minutes");
+
+                        updateTimer.Start();
+                    }
+                }
+                else
+                {
+                    // Se il cliente non è ancora inizializzato, inizializza tutto
+                    Initialize();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger?.Log($"Error reloading configuration: {ex.Message}");
+                throw;
+            }
+        }
+
+
         public void UpdateDnsRecords()
         {
             // Verifica se il client è inizializzato

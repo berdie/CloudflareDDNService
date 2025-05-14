@@ -9,3 +9,5 @@ D:\repos\CloudflareDDNService\CloudflareDDNService\obj\Release\CloudflareDDNServ
 D:\repos\CloudflareDDNService\CloudflareDDNService\obj\Release\Cloudfla.87D44139.Up2Date
 D:\repos\CloudflareDDNService\CloudflareDDNService\obj\Release\CloudflareDDNService.exe
 D:\repos\CloudflareDDNService\CloudflareDDNService\obj\Release\CloudflareDDNService.pdb
+D:\repos\CloudflareDDNService\CloudflareDDNService\obj\Release\CloudflareDDNService.ConfigurationForm.resources
+D:\repos\CloudflareDDNService\CloudflareDDNService\obj\Release\CloudflareDDNService.csproj.GenerateResource.cache

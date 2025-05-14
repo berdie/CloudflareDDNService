@@ -13,19 +13,20 @@ namespace CloudflareDDNService
 {
     public class CloudflareApplicationContext : ApplicationContext
     {
-        private readonly CloudflareDDNService service;
         private readonly SystemTrayIcon trayIcon;
 
         public CloudflareApplicationContext()
         {
-            // Crea il servizio e la tray icon
-            service = new CloudflareDDNService();
+            // Usa l'istanza già creata in Program
+            var service = Program.ServiceInstance;
+
+            // Crea la tray icon
             trayIcon = new SystemTrayIcon(service);
-            
+
             // Li connette
             service.SetTrayIcon(trayIcon);
 
-            // Inizializazione della tray icon e del servizio
+            // Inizializzazione della tray icon e del servizio
             trayIcon.Initialize();
             service.Initialize();
         }
@@ -42,6 +43,8 @@ namespace CloudflareDDNService
 
     static class Program
     {
+        public static CloudflareDDNService ServiceInstance { get; private set; }
+
         // Mutex per garantire un'unica istanza
         private static Mutex mutex = null;
 
@@ -54,25 +57,28 @@ namespace CloudflareDDNService
                 string appName = Assembly.GetExecutingAssembly().GetName().Name;
                 bool createdNew;
                 mutex = new Mutex(true, appName, out createdNew);
-                
+
                 if (!createdNew)
                 {
-                    MessageBox.Show("Un'altra istanza dell'applicazione è già in esecuzione.", 
+                    MessageBox.Show("Un'altra istanza dell'applicazione è già in esecuzione.",
                         "Istanza multipla", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
+
+                // Crea una sola istanza del servizio all'inizio
+                ServiceInstance = new CloudflareDDNService();
 
                 // Se l'argomento è "--service", esegui come servizio
                 if (args.Length > 0 && args[0].ToLower() == "--service")
                 {
                     ServiceBase[] ServicesToRun = new ServiceBase[]
                     {
-                        new CloudflareDDNService()
+                        ServiceInstance  // Usa l'istanza già creata
                     };
                     ServiceBase.Run(ServicesToRun);
                 }
                 else
-                {             
+                {
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
 
@@ -95,3 +101,4 @@ namespace CloudflareDDNService
         }
     }
 }
+
