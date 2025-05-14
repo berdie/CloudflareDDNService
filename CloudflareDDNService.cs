@@ -109,8 +109,7 @@ namespace CloudflareDDNService
                             $"Si è verificato un errore: {ex.Message}",
                             true);
                     }
-                    
-                    // Anche in caso di errore, segniamo come inizializzato per evitare loop
+                                        
                     isInitialized = true;
                     return;
                 }
@@ -213,8 +212,7 @@ namespace CloudflareDDNService
                     logger.Log($"Errore durante l'avvio del servizio: {ex.Message}");
                     logger.Log($"Stack trace: {ex.StackTrace}");
                 }
-
-                // Per i servizi Windows, dobbiamo rilanciare l'eccezione
+                
                 throw;
             }
         }
@@ -276,8 +274,7 @@ namespace CloudflareDDNService
 
                 string currentIp = ipProvider.GetPublicIpAddress();
                 logger.Log($"║ IP pubblico attuale: {currentIp}");
-
-                // Ottieni i dettagli completi dell'aggiornamento
+          
                 var result = cloudflareClient.UpdateDnsRecords(currentIp);
                 var updatedRecords = cloudflareClient.GetUpdatedRecords();
 

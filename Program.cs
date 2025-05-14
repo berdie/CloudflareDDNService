@@ -18,14 +18,14 @@ namespace CloudflareDDNService
 
         public CloudflareApplicationContext()
         {
-            // Create the service and tray icon
+            // Crea il servizio e la tray icon
             service = new CloudflareDDNService();
             trayIcon = new SystemTrayIcon(service);
             
-            // Connect them
+            // Li connette
             service.SetTrayIcon(trayIcon);
-            
-            // Initialize
+
+            // Inizializazione della tray icon e del servizio
             trayIcon.Initialize();
             service.Initialize();
         }
@@ -62,7 +62,7 @@ namespace CloudflareDDNService
                     return;
                 }
 
-                // If running with --service argument, run as a service
+                // Se l'argomento è "--service", esegui come servizio
                 if (args.Length > 0 && args[0].ToLower() == "--service")
                 {
                     ServiceBase[] ServicesToRun = new ServiceBase[]
@@ -72,8 +72,7 @@ namespace CloudflareDDNService
                     ServiceBase.Run(ServicesToRun);
                 }
                 else
-                {
-                    // Otherwise, run as a Windows Forms application
+                {             
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
 

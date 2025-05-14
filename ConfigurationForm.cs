@@ -87,8 +87,7 @@ namespace CloudflareDDNService
 
         private void btnUpdateNow_Click(object sender, EventArgs e)
         {
-            // This would trigger the service to update DNS records
-            // In a real implementation, you'd need to communicate with the service
+
             MessageBox.Show("Manual update triggered", "Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

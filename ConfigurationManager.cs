@@ -26,7 +26,6 @@ namespace CloudflareDDNService
             {
                 logger = new Logger();
                 
-                // Ensure directory exists
                 string configDir = Path.GetDirectoryName(configPath);
                 if (!Directory.Exists(configDir))
                 {
@@ -96,7 +95,7 @@ namespace CloudflareDDNService
                 }
             }
 
-            // Return default configuration if loading fails
+            
             return new Configuration();
         }
 

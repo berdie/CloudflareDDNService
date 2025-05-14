@@ -65,7 +65,7 @@ namespace CloudflareDDNService
                 
                 notifyIcon.ContextMenuStrip = contextMenu;
                 
-                // Double-click to open configuration
+                
                 notifyIcon.DoubleClick += (s, e) => ShowConfigurationForm();
             }
             catch (Exception ex)
@@ -73,7 +73,6 @@ namespace CloudflareDDNService
                 MessageBox.Show($"Errore durante l'inizializzazione dell'icona: {ex.Message}", 
                     "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 
-                // Tenta di creare comunque la notifyIcon senza l'icona personalizzata
                 notifyIcon = new NotifyIcon
                 {
                     Icon = SystemIcons.Application,

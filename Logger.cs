@@ -31,7 +31,7 @@ namespace CloudflareDDNService
                 string logEntry = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} - {message}";
                 File.AppendAllText(logFilePath, logEntry + Environment.NewLine);
                 
-                Console.WriteLine(logEntry); // Also output to console for debugging
+                Console.WriteLine(logEntry);
             }
             catch (Exception ex)
             {
@@ -53,14 +53,14 @@ namespace CloudflareDDNService
 
         private void RotateLogs()
         {
-            // Delete oldest log file if we have reached the maximum
+            
             string oldestLog = Path.Combine(logDirectory, $"service.{maxLogFiles}.log");
             if (File.Exists(oldestLog))
             {
                 File.Delete(oldestLog);
             }
 
-            // Shift all other log files
+            
             for (int i = maxLogFiles - 1; i >= 1; i--)
             {
                 string currentLog = Path.Combine(logDirectory, $"service.{i}.log");
@@ -72,7 +72,7 @@ namespace CloudflareDDNService
                 }
             }
 
-            // Move current log to service.1.log
+            
             File.Move(logFilePath, Path.Combine(logDirectory, "service.1.log"));
         }
     }

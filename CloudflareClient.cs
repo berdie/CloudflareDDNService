@@ -37,14 +37,11 @@ namespace CloudflareDDNService
             this.updatedRecords = new List<DnsRecordUpdate>();
 
             client = new HttpClient();
-            client.Timeout = TimeSpan.FromSeconds(30); // Imposta un timeout ragionevole
+            client.Timeout = TimeSpan.FromSeconds(30); // Imposta un timeout
 
-            // Correggi le intestazioni HTTP
             client.DefaultRequestHeaders.Add("X-Auth-Email", email);
             client.DefaultRequestHeaders.Add("X-Auth-Key", apiKey);
 
-            // Il Content-Type non dovrebbe essere impostato nelle DefaultRequestHeaders
-            // ma nell'oggetto HttpContent quando si effettua una richiesta
         }
 
         public List<DnsRecordUpdate> GetUpdatedRecords()
@@ -60,8 +57,6 @@ namespace CloudflareDDNService
 
             try
             {
-                // Utilizziamo Task.Run per eseguire il codice asincrono in modo sincrono
-                // senza rischio di deadlock sul thread UI
                 return Task.Run(async () => await GetZoneIdInternalAsync()).Result;
             }
             catch (Exception ex)
@@ -96,7 +91,6 @@ namespace CloudflareDDNService
             }
         }
 
-        // Mantengo la vecchia firma per compatibilità con il codice esistente
         public async Task<string> GetZoneIdAsync()
         {
             if (!string.IsNullOrEmpty(zoneId))
@@ -167,7 +161,7 @@ namespace CloudflareDDNService
                         continue;
                     }
 
-                    // Update the record
+                    // Aggiorna il record DNS
                     var updateData = new
                     {
                         type = "A",
