@@ -1,11 +1,11 @@
-=================================================
-     CLOUDFLARE DDNS SERVICE - INSTRUCTIONS
-=================================================
+# =================================================
+# <img src="https://icon.icepanel.io/Technology/svg/Cloudflare.svg" width="50" /> CLOUDFLARE DDNS SERVICE - INSTRUCTIONS
+# =================================================
 
 This application allows you to automatically update Cloudflare DNS records
 with the public IP address of your device.
 
-SERVICE INSTALLATION AND MANAGEMENT
+### SERVICE INSTALLATION AND MANAGEMENT
 -------------------------------------
 
 To easily manage all operations, use the file:
@@ -14,7 +14,7 @@ To easily manage all operations, use the file:
 This script provides an interface to perform all necessary
 operations on the service.
 
-MANUAL INSTALLATION
+### MANUAL INSTALLATION
 ---------------------
 
 1. Right-click on "InstallService.bat"
@@ -23,7 +23,7 @@ MANUAL INSTALLATION
 
 The service will be installed and configured for automatic startup.
 
-CONFIGURATION
+### CONFIGURATION
 -------------
 
 1. Start the CloudflareDDNService.exe application
@@ -36,7 +36,7 @@ CONFIGURATION
 Configuration data is saved in:
 %APPDATA%\CloudflareDDNService\config.json
 
-LOG FILE
+### LOG FILE
 -----------
 
 Service logs are available in:
@@ -45,7 +45,7 @@ Service logs are available in:
 You can view them through the management menu or directly
 by opening the file.
 
-UNINSTALLATION
+### UNINSTALLATION
 ---------------
 
 1. Right-click on "UninstallService.bat"
@@ -55,7 +55,7 @@ UNINSTALLATION
 To completely remove the application, also delete:
 %APPDATA%\CloudflareDDNService\
 
-TROUBLESHOOTING
+### TROUBLESHOOTING
 -------------------
 
 If the service does not start:
@@ -66,4 +66,4 @@ If the service does not start:
 If the icon in the taskbar disappears:
 1. Restart the CloudflareDDNService.exe application
 
-=================================================
+### =================================================
