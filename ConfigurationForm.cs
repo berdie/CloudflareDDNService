@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Windows.Forms;
 using MaterialSkin;
 using MaterialSkin.Controls;
@@ -94,6 +95,35 @@ namespace CloudflareDDNService
         private void btnRefreshIp_Click(object sender, EventArgs e)
         {
             UpdateCurrentIp();
+        }
+
+        private void btnViewLogs_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string logPath = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                    "CloudflareDDNService", 
+                    "Logs", 
+                    "service.log");
+                    
+                if (File.Exists(logPath))
+                {
+                    // Apre il file di log con l'applicazione predefinita per i file .log
+                    System.Diagnostics.Process.Start(logPath);
+                }
+                else
+                {
+                    MessageBox.Show("Il file di log non esiste ancora.", 
+                        "File non trovato", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Errore nell'apertura del file di log: {ex.Message}", 
+                    "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                logger.Log($"Errore nell'apertura del file di log: {ex.Message}");
+            }
         }
     }
 }

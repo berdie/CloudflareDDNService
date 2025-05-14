@@ -25,6 +25,7 @@ namespace CloudflareDDNService
             this.btnSave = new MaterialSkin.Controls.MaterialButton();
             this.btnUpdateNow = new MaterialSkin.Controls.MaterialButton();
             this.btnRefreshIp = new MaterialSkin.Controls.MaterialButton();
+            this.btnViewLogs = new MaterialSkin.Controls.MaterialButton();
             
             // txtApiKey
             this.txtApiKey.Hint = "API Key";
@@ -69,6 +70,12 @@ namespace CloudflareDDNService
             this.btnRefreshIp.Size = new System.Drawing.Size(170, 40);
             this.btnRefreshIp.Click += new System.EventHandler(this.btnRefreshIp_Click);
             
+            // btnViewLogs
+            this.btnViewLogs.Text = "View Logs";
+            this.btnViewLogs.Location = new System.Drawing.Point(200, 430);
+            this.btnViewLogs.Size = new System.Drawing.Size(170, 40);
+            this.btnViewLogs.Click += new System.EventHandler(this.btnViewLogs_Click);
+            
             // ConfigurationForm
             this.ClientSize = new System.Drawing.Size(390, 490);
             this.Controls.Add(this.txtApiKey);
@@ -79,6 +86,7 @@ namespace CloudflareDDNService
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnUpdateNow);
             this.Controls.Add(this.btnRefreshIp);
+            this.Controls.Add(this.btnViewLogs);
             this.Name = "ConfigurationForm";
             this.Text = "Cloudflare DDNS Configuration";
             this.ResumeLayout(false);
@@ -94,5 +102,6 @@ namespace CloudflareDDNService
         private MaterialSkin.Controls.MaterialButton btnSave;
         private MaterialSkin.Controls.MaterialButton btnUpdateNow;
         private MaterialSkin.Controls.MaterialButton btnRefreshIp;
+        private MaterialSkin.Controls.MaterialButton btnViewLogs;
     }
 }
