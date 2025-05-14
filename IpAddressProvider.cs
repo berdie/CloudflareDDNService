@@ -1,6 +1,8 @@
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace CloudflareDDNService
 {
@@ -22,22 +24,59 @@ namespace CloudflareDDNService
 
         public string GetPublicIpAddress()
         {
+            List<Exception> allExceptions = new List<Exception>();
+            
             foreach (var service in ipServices)
             {
                 try
                 {
-                    var response = client.GetStringAsync(service).Result;
-                    var ip = response.Trim();
-                    logger.Log($"Got IP {ip} from {service}");
-                    return ip;
+                    // Imposta un timeout per evitare blocchi
+                    var task = client.GetStringAsync(service);
+                    if (Task.WhenAny(task, Task.Delay(5000)).Result == task) // 5 secondi di timeout
+                    {
+                        var response = task.Result.Trim();
+                        if (!string.IsNullOrEmpty(response))
+                        {
+                            logger.Log($"Got IP {response} from {service}");
+                            return response;
+                        }
+                        else
+                        {
+                            logger.Log($"Received empty response from {service}");
+                        }
+                    }
+                    else
+                    {
+                        logger.Log($"Timeout when connecting to {service}");
+                        allExceptions.Add(new TimeoutException($"Timeout when connecting to {service}"));
+                    }
                 }
                 catch (Exception ex)
                 {
                     logger.Log($"Failed to get IP from {service}: {ex.Message}");
+                    allExceptions.Add(ex);
                 }
             }
 
-            throw new Exception("Failed to get public IP address from any service");
+            // Se i servizi di IP online falliscono, prova a ottenere un indirizzo IP locale
+            try
+            {
+                var localIp = System.Net.Dns.GetHostAddresses(System.Net.Dns.GetHostName())
+                    .FirstOrDefault(ip => ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)?.ToString();
+                
+                if (!string.IsNullOrEmpty(localIp))
+                {
+                    logger.Log($"Using local IP address as fallback: {localIp}");
+                    return localIp;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Log($"Failed to get local IP address: {ex.Message}");
+                allExceptions.Add(ex);
+            }
+
+            throw new AggregateException("Failed to get public IP address from any service", allExceptions);
         }
     }
 }

@@ -1,0 +1,11 @@
+D:\repos\CloudflareDDNService\CloudflareDDNService\obj\Debug\CloudflareDDNService.csproj.AssemblyReference.cache
+D:\repos\CloudflareDDNService\CloudflareDDNService\obj\Debug\CloudflareDDNService.csproj.CoreCompileInputs.cache
+D:\repos\CloudflareDDNService\CloudflareDDNService\bin\Debug\CloudflareDDNService.exe.config
+D:\repos\CloudflareDDNService\CloudflareDDNService\bin\Debug\CloudflareDDNService.exe
+D:\repos\CloudflareDDNService\CloudflareDDNService\bin\Debug\CloudflareDDNService.pdb
+D:\repos\CloudflareDDNService\CloudflareDDNService\bin\Debug\MaterialSkin.dll
+D:\repos\CloudflareDDNService\CloudflareDDNService\bin\Debug\Newtonsoft.Json.dll
+D:\repos\CloudflareDDNService\CloudflareDDNService\bin\Debug\Newtonsoft.Json.xml
+D:\repos\CloudflareDDNService\CloudflareDDNService\obj\Debug\Cloudfla.87D44139.Up2Date
+D:\repos\CloudflareDDNService\CloudflareDDNService\obj\Debug\CloudflareDDNService.exe
+D:\repos\CloudflareDDNService\CloudflareDDNService\obj\Debug\CloudflareDDNService.pdb
