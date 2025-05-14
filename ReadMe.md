@@ -1,6 +1,6 @@
-# =============================================
+##### =============================================
 # <img src="https://icon.icepanel.io/Technology/svg/Cloudflare.svg" width="50" /> CLOUDFLARE DDNS SERVICE - INSTRUCTIONS
-# =============================================
+##### =============================================
 
 This application allows you to automatically update Cloudflare DNS records
 with the public IP address of your device.
