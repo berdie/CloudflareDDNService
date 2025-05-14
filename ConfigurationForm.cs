@@ -37,11 +37,13 @@ namespace CloudflareDDNService
         private void LoadConfiguration()
         {
             var config = configManager.LoadConfiguration();
-            
+
             txtApiKey.Text = config.ApiKey;
             txtEmail.Text = config.Email;
             txtDomain.Text = config.Domain;
-            numUpdateInterval.Value = config.UpdateInterval;
+
+            // Converti il valore intero in stringa
+            numUpdateInterval.Text = config.UpdateInterval.ToString();
         }
 
         private void UpdateCurrentIp()
@@ -60,17 +62,27 @@ namespace CloudflareDDNService
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            // Converti il testo in un intero
+            int updateInterval;
+            if (!int.TryParse(numUpdateInterval.Text, out updateInterval))
+            {
+                MessageBox.Show("L'intervallo di aggiornamento deve essere un numero intero valido.",
+                    "Errore di validazione", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             var config = new Configuration
             {
                 ApiKey = txtApiKey.Text,
                 Email = txtEmail.Text,
                 Domain = txtDomain.Text,
-                UpdateInterval = (int)numUpdateInterval.Value
+                UpdateInterval = updateInterval
             };
-            
+
             configManager.SaveConfiguration(config);
             MessageBox.Show("Configuration saved successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
 
         private void btnUpdateNow_Click(object sender, EventArgs e)
         {
