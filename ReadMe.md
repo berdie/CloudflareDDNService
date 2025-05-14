@@ -1,25 +1,69 @@
-# Sviluppo di un servizio Windows .Net Framework 4.8 per aggiornare i records di tipo A su Cloudflare.
+=================================================
+     CLOUDFLARE DDNS SERVICE - INSTRUCTIONS
+=================================================
 
-#### Funzioni:
-- Nome del servizio 'CloudflareDDNService' (sostituire a Service1.cs e impostare come oggetto di avvio ) 
- **Un interfaccia per:** 
-- Inserire i dati per la connessione a Cloudflare 'ApiKey', 'Email', 'Dominio'.
-- Consente di impostare il timer per l'aggiornamento, ma anche avere la possibilità
-  di essere aggiornato manualmente. 
-- Memorizzare i dati di configurazione.
-- Visualizza l'attuale indirizzo IP dell Host.
-- Visibile ed accessibile nella System Tray Icons con l'icona cloudflare.ico che si trova nella directory principale del progetto.
+This application allows you to automatically update Cloudflare DNS records
+with the public IP address of your device.
 
-#### Altre funzioni per il servizio:
-- Ottiene l'indirizzo IP da 'https://ipv4.icanhazip.com/' o 'https://api.ipify.org'
-- Ottiene automaticamente lo zone_id e record_id usando il nome del dominio
-- Aggiorna tutti i record di tipo A sul dominio
-- Verifica degli indirizzi IP su Cloudflare e confronto con l'IP dell'Host
-- Aggiornare gli indirizzi IP su Cloudflare se non corrispondono all'indirizzo IP dell' host
-- Notifica se l'aggiornamento ha avuto successo o fallisce.
-- Crea un file di log per il controllo degli aggiornamenti e il debug.
-- Crea un sistema a rotazione che limita la dimensione dei file di log.
-- Il progetto è in lingua Inglese.
-- Per l'esecuzione sono richiesti i diritti di Amministratore
-Utilizzo di MaterialSkin.2 per l'interfaccia e il tema 'OrangeDark'
-MaterialSkin.2 e Newtonsoft.Json già installati
+SERVICE INSTALLATION AND MANAGEMENT
+-------------------------------------
+
+To easily manage all operations, use the file:
+   ServiceControl.bat  (Run as administrator)
+
+This script provides an interface to perform all necessary
+operations on the service.
+
+MANUAL INSTALLATION
+---------------------
+
+1. Right-click on "InstallService.bat"
+2. Select "Run as administrator"
+3. Follow the on-screen instructions
+
+The service will be installed and configured for automatic startup.
+
+CONFIGURATION
+-------------
+
+1. Start the CloudflareDDNService.exe application
+2. Configure:
+   - Cloudflare API Key
+   - Cloudflare account Email address
+   - Domain name (e.g., example.com)
+   - Update interval (in minutes)
+
+Configuration data is saved in:
+%APPDATA%\CloudflareDDNService\config.json
+
+LOG FILE
+-----------
+
+Service logs are available in:
+%APPDATA%\CloudflareDDNService\Logs\service.log
+
+You can view them through the management menu or directly
+by opening the file.
+
+UNINSTALLATION
+---------------
+
+1. Right-click on "UninstallService.bat"
+2. Select "Run as administrator"
+3. Follow the on-screen instructions
+
+To completely remove the application, also delete:
+%APPDATA%\CloudflareDDNService\
+
+TROUBLESHOOTING
+-------------------
+
+If the service does not start:
+1. Verify that the configuration has been completed correctly
+2. Check the log files for any errors
+3. Use QueryService.bat to check the status of the service
+
+If the icon in the taskbar disappears:
+1. Restart the CloudflareDDNService.exe application
+
+=================================================
